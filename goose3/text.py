@@ -44,28 +44,21 @@ def get_encodings_from_content(content):
     """
     if isinstance(content, six.binary_type) and six.PY3:
         find_charset = re.compile(
-            br'<meta.*?charset=["\']*(.+?)["\'>]', flags=re.I
-        ).findall
+            br'<meta.*?charset=["\']*(.+?)["\'>]', flags=re.I).findall
 
         find_pragma = re.compile(
-            br'<meta.*?content=["\']*;?charset=(.+?)["\'>]', flags=re.I
-        ).findall
+            br'<meta.*?content=["\']*;?charset=(.+?)["\'>]',
+            flags=re.I).findall
 
-        find_xml = re.compile(
-            br'^<\?xml.*?encoding=["\']*(.+?)["\'>]'
-        ).findall
+        find_xml = re.compile(br'^<\?xml.*?encoding=["\']*(.+?)["\'>]').findall
     else:
         find_charset = re.compile(
-            r'<meta.*?charset=["\']*(.+?)["\'>]', flags=re.I
-        ).findall
+            r'<meta.*?charset=["\']*(.+?)["\'>]', flags=re.I).findall
 
         find_pragma = re.compile(
-            r'<meta.*?content=["\']*;?charset=(.+?)["\'>]', flags=re.I
-        ).findall
+            r'<meta.*?content=["\']*;?charset=(.+?)["\'>]', flags=re.I).findall
 
-        find_xml = re.compile(
-            r'^<\?xml.*?encoding=["\']*(.+?)["\'>]'
-        ).findall
+        find_xml = re.compile(r'^<\?xml.*?encoding=["\']*(.+?)["\'>]').findall
     return find_charset(content) + find_pragma(content) + find_xml(content)
 
 
@@ -90,7 +83,6 @@ def encodeValue(value):
 
 
 class WordStats(object):
-
     def __init__(self):
         # total number of stopwords or
         # good words that we can calculate
@@ -124,7 +116,6 @@ class WordStats(object):
 
 class StopWords(object):
 
-    PUNCTUATION = re.compile("[^\\p{Ll}\\p{Lu}\\p{Lt}\\p{Lo}\\p{Nd}\\p{Pc}\\s]")
     _cached_stop_words = {}
 
     def __init__(self, language='en'):
@@ -174,6 +165,7 @@ class StopWordsChinese(StopWords):
     """
     Chinese segmentation
     """
+
     def __init__(self, language='zh'):
         # force zh languahe code
         super(StopWordsChinese, self).__init__(language='zh')
@@ -190,6 +182,7 @@ class StopWordsArabic(StopWords):
     """
     Arabic segmentation
     """
+
     def __init__(self, language='ar'):
         # force ar languahe code
         super(StopWordsArabic, self).__init__(language='ar')
@@ -210,6 +203,7 @@ class StopWordsKorean(StopWords):
     """
     Korean segmentation
     """
+
     def __init__(self, language='ko'):
         super(StopWordsKorean, self).__init__(language='ko')
 
